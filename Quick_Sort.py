@@ -22,10 +22,22 @@ def random_partition(arr,l,h):
     arr[r],arr[l]=arr[l],arr[r]
     return partition(arr,l,h)
 
+def median_Of_Three(arr,l,h):
+    mid=(l+h)//2
+    if arr[h-1]<arr[l]:
+        arr[h-1],arr[l]=arr[l],arr[h-1]
+    if arr[mid]<arr[l]:
+        arr[mid],arr[l]=arr[l],arr[mid]
+    if arr[mid]>arr[h-1]:
+        arr[mid],arr[h-1]=arr[h-1],arr[mid]
+    arr[mid],arr[l]=arr[mid],arr[l]
+    return partition(arr,l,h)
+
+
 def quickSort(arr,l,h):
 
     if l<h:
-        j=random_partition(arr,l,h)
+        j=median_Of_Three(arr,l,h)
         quickSort(arr,l,j)
         quickSort(arr,j+1,h)
 
