@@ -1,3 +1,4 @@
+import random
 def partition(arr,l,h):
     pivot=arr[l]
     i=l+1
@@ -16,14 +17,19 @@ def partition(arr,l,h):
     arr[l],arr[j]=arr[j],arr[l]
     return j
 
+def random_partition(arr,l,h):
+    r=random.randint(l,h-1)
+    arr[r],arr[l]=arr[l],arr[r]
+    return partition(arr,l,h)
+
 def quickSort(arr,l,h):
 
     if l<h:
-        j=partition(arr,l,h)
+        j=random_partition(arr,l,h)
         quickSort(arr,l,j)
         quickSort(arr,j+1,h)
 
 if __name__=='__main__':
-     ls=[23,4,21,456,3,21,245,242,1212,4,2,1,2,2,23,4,567,89,431,0]
+     ls=[-23,4,21,2,3,4,5,6,2,2345,0,241,0]
      quickSort(ls,0,len(ls))
      print(ls)
