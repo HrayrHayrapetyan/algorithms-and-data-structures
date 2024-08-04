@@ -33,6 +33,9 @@ class LinkedList:
 
     def erase_After(self,prev_node):
 
+        if self.head is None:
+            raise  IndexError('List Is Empty')
+
         curr=self.head
         while(curr.data!=prev_node.data):
             curr=curr.next
