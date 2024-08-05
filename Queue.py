@@ -1,31 +1,19 @@
-from DynamicArray import DynamicArray
 
 class Queue:
-
     def __init__(self):
-        self.array=DynamicArray(5)
+        self.array=[]
     def Enqueue(self,ele):
-        if self.array.n==self.array.cap:
-            print('Queue Is Full')
-        else:
-            self.array.pushBack(ele)
+        self.array.append(ele)
     def Dequeue(self):
-        if self.isEmpty():
-            print('Queue Is Empty')
-            return
-        else:
-            for i in range(self.array.n-1):
-                self.array[i]=self.array[i+1]
-            self.array[self.array.n-1]=None
-            self.array.n-=1
+        self.array.pop()
     def Peek(self):
         return self.array[0]
     def isEmpty(self):
-        return self.array.n==0
+        return len(self.array)==0
     def Size(self):
-        return self.array.n
+        return len(self.array)
     def Print(self):
-        for i in range(self.array.n-1,-1,-1):
+        for i in range(len(self.array)-1,-1,-1):
             print(self.array[i])
         print()
 
