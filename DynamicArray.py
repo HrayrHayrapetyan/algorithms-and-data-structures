@@ -3,9 +3,9 @@ import ctypes
 
 class DynamicArray:
 
-    def __init__(self):
+    def __init__(self,cap):
         self.n = 0
-        self.cap = 1
+        self.cap = cap
         self.array = self.makeArray(self.cap)
 
     def reserve(self, new_cap):
@@ -134,20 +134,4 @@ class DynamicArray:
     def makeArray(self, newcap):
 
         return (newcap * ctypes.py_object)()
-
-
-arr = DynamicArray()
-arr.pushBack(34)
-arr.pushBack(54)
-arr.pushBack(32)
-arr.pushBack(54)
-arr.pushBack(0)
-
-arr.insert(2, 312)
-print(arr)
-arr.removeAt(4)
-arr.clear()
-print(arr)
-
-
 
