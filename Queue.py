@@ -10,10 +10,14 @@ class Queue:
         else:
             self.array.pushBack(ele)
     def Dequeue(self):
-        for i in range(self.array.n-1):
-            self.array[i]=self.array[i+1]
-        self.array[self.array.n-1]=None
-        self.array.n-=1
+        if self.isEmpty():
+            print('Queue Is Empty')
+            return
+        else:
+            for i in range(self.array.n-1):
+                self.array[i]=self.array[i+1]
+            self.array[self.array.n-1]=None
+            self.array.n-=1
     def Peek(self):
         return self.array[0]
     def isEmpty(self):
