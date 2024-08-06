@@ -19,7 +19,7 @@ class Queue:
             data=self.front
             self.front+=1
             self.size-=1
-        return data
+            return data
     def isEmpty(self):
         return self.size==0
 
