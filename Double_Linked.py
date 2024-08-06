@@ -39,8 +39,8 @@ class Double_Linked:
             self.tail=newNode
     def pop_Back(self):
 
-        if self.head is None:
-            raise IndexError('List Is Empty')
+        if self.tail is None:
+            return
 
         if self.head==self.tail:
             self.head=self.tail=None
@@ -87,14 +87,41 @@ class Double_Linked:
 
         self.head = prev
 
-    def merge_Other(self,ls):
+    def merge_Other(self, other_List):
+        curr1 = self.head
+        curr2 = other_List.head
+        ls3 = Double_Linked()
+        dummynode = Node()
+        mergedcurr = dummynode
 
-        if self.head is None or ls.head is None:
-                raise ValueError('Lists Should Not Be Empty')
+        while curr1 is not None and curr2 is not None:
+            if curr1.data <= curr2.data:
+                mergedcurr.next = curr1
+                curr1.prev=mergedcurr
+                curr1 = curr1.next
+            else:
+                mergedcurr.next = curr2
+                curr2.prev=mergedcurr
+                curr2 = curr2.next
+            mergedcurr = mergedcurr.next
 
-        self.tail.next=ls.head
-        ls.head.prev=self.tail
-        self.tail=ls.tail
+        if curr1 is not None:
+            mergedcurr.next = curr1
+            curr1.prev=mergedcurr
+        else:
+            mergedcurr.next = curr2
+            curr2.prev=mergedcurr
+
+        ls3.head = dummynode.next
+
+        if ls.head:
+            ls.head.prev=None
+        curr=ls3.head
+        while curr and curr.next:
+            curr=curr.next
+        ls3.tail=curr
+        return ls3
+
     def sort(self):
 
         swapped = True
@@ -146,9 +173,7 @@ if __name__=='__main__':
     ls2.push_Front(0)
     ls2.print_List()
     ls.sort()
+    ls2.sort()
     ls.print_List()
-    ls.merge_Other(ls2)
-    ls.print_List()
-
-    ls.insert_After(Node(435),10)
-    ls.print_List()
+    ls3=ls.merge_Other(ls2)
+    ls3.print_List()

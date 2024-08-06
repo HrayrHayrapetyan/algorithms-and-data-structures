@@ -66,10 +66,28 @@ class LinkedList:
         self.head=prev
 
     def merge_Other(self,other_List):
-            curr=self.head
-            while curr.next!=None:
-                curr=curr.next
-            curr.next=other_List.head
+            curr1=self.head
+            curr2=other_List.head
+            ls3=LinkedList()
+            dummynode=Node(None)
+            mergedcurr=dummynode
+
+            while curr1 is not None and curr2 is not None:
+                if curr1.data<=curr2.data:
+                    mergedcurr.next=curr1
+                    curr1=curr1.next
+                else:
+                    mergedcurr.next=curr2
+                    curr2=curr2.next
+                mergedcurr=mergedcurr.next
+
+            if curr1 is not None:
+                mergedcurr.next=curr1
+            else:
+                mergedcurr.next=curr2
+
+            ls3.head=dummynode.next
+            return ls3
     def sort(self):
 
         swapped=True
@@ -116,19 +134,17 @@ if __name__=='__main__':
     ls.push_Front(56)
     ls.erase_After(Node(562))
     ls.erase_After(Node(56))
-
     ls2=LinkedList()
     ls2.push_Front(66)
     ls2.push_Front(66)
     ls2.push_Front(34)
-    ls2.print_List()
-    ls.merge_Other(ls2)
-    ls.print_List()
-
     ls.sort()
+    ls2.sort()
     ls.print_List()
-    ls.remove_Duplicate()
-    ls.print_List()
+    ls2.print_List()
+
+    ls3=ls.merge_Other(ls2)
+    ls3.print_List()
 
 
 
