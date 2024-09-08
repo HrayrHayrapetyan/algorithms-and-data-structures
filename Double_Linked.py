@@ -1,3 +1,5 @@
+from wsgiref.validate import header_re
+
 
 class Node:
     def __init__(self,data=None):
@@ -9,6 +11,33 @@ class Double_Linked:
     def __init__(self):
         self.head=None
         self.tail=None
+
+    def __getitem__(self, index):
+
+        curr=self.head
+
+        while index>0:
+            curr=curr.next
+            index-=1
+        return curr.data
+
+    def erase(self,index):
+        curr=self.head
+
+        while index>=0:
+            curr=curr.next
+            index-=1
+
+        curr.next=curr.next.next
+
+
+    def Size(self):
+        curr=self.head
+        count=0
+        while curr:
+            curr=curr.next
+            count+=1
+        return count
 
     def push_Front(self, data):
 
@@ -74,6 +103,16 @@ class Double_Linked:
 
     def front(self):
         return self.head
+
+    def insert(self,index,value):
+        curr=self.head
+        while index>1:
+            curr=curr.next
+            index-=1
+
+        newnode=Node(value)
+        newnode.next=curr.next
+        curr.next=newnode
 
     def reverse(self):
         prev = None
